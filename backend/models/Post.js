@@ -1,0 +1,20 @@
+import mongoose from "mongoose";
+
+const postSchema = new mongoose.Schema(
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    text: { type: String },
+    imageUrl: { type: String },
+    likes: [{ type: String }], // usernames of users who liked
+    comments: [
+      {
+        username: String,
+        text: String,
+        createdAt: { type: Date, default: Date.now }
+      }
+    ]
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model("Post", postSchema);
