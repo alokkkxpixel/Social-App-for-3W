@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
+const jwt = require( "jsonwebtoken");
 
-export const protect = (req, res, next) => {
+module.exports.authMiddleware = (req, res, next) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
   if (!token) return res.status(401).json({ message: "No token, authorization denied" });
 

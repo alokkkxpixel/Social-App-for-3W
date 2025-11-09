@@ -1,17 +1,17 @@
-import User from "../models/User.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+const User = require("../models/User.js");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // Signup
-export const signup = async (req, res) => {
+module.exports.signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
     const userExists = await User.findOne({ email });
     if (userExists) return res.status(400).json({ message: "User already exists" });
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+   
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({ username, email, password: hashedPassword });
     res.status(201).json({ message: "User created successfully", user });
@@ -21,7 +21,7 @@ export const signup = async (req, res) => {
 };
 
 // Login
-export const login = async (req, res) => {
+module.exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -35,7 +35,7 @@ export const login = async (req, res) => {
       expiresIn: "7d"
     });
 
-    res.json({ token, user });
+    res.json({ message:"User login successfully!" token, user });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }

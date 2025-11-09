@@ -1,8 +1,8 @@
-import Post from "../models/Post.js";
-import User from "../models/User.js";
+const Post = require( "../models/Post.js");
+const User = require( "../models/User.js");
 
 // Create a new post
-export const createPost = async (req, res) => {
+module.exports.createPost = async (req, res) => {
   try {
     const { text } = req.body;
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
@@ -24,7 +24,7 @@ export const createPost = async (req, res) => {
 };
 
 // Get all posts
-export const getAllPosts = async (req, res) => {
+module.exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate("userId", "username").sort({ createdAt: -1 });
     res.json(posts);
