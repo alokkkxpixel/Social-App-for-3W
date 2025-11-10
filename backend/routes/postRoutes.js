@@ -1,6 +1,6 @@
 const  express = require( "express");
 const  multer = require( "multer");
-const  { createPost, getAllPosts, toggleLike, addComment } = require( "../controller/postController");
+const  { createPost, getAllPosts, toggleLike, addComment, getPostById } = require( "../controller/postController");
 const  { authMiddleware } = require( "../middleware/authMiddleware");
 const { body } = require("express-validator");
 
@@ -21,7 +21,7 @@ router.post("/create", authMiddleware,
 
 
 router.get("/all", getAllPosts);
-
+router.get("/:id", authMiddleware,getPostById)
 router.put("/like/:id", authMiddleware , toggleLike )
 
 router.post("/comment/:id", authMiddleware, 

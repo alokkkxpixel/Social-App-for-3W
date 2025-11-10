@@ -33,6 +33,24 @@ module.exports.getAllPosts = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+// getpost by id
+
+module.exports.getPostById = async (req,res) => {
+
+  try {
+     
+    const { id} = req.params
+    console.log(id)
+
+    const post = await Post.findById(id).populate("userId", "username")
+
+    res.json({message:"Post gotted", post})
+
+  } catch (err) {
+    res.status(500).json({message:"Server error" , err})
+  }
+}
+
 
 // like and unlike 
 
