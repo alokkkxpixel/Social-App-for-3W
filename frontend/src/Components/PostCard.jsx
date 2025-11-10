@@ -1,38 +1,32 @@
-import { Card, CardContent, Typography, IconButton, CardMedia, Box } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Card, CardHeader, CardContent, CardActions, Avatar, IconButton, Typography } from "@mui/material";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import ShareIcon from "@mui/icons-material/Share";
 import { useNavigate } from "react-router-dom";
-import API from "../api/axiosConfig";
 
-export default function PostCard({ post, onLike }) {
+export default function PostCard({ post }) {
   const navigate = useNavigate();
 
-  const toggleLike = async () => {
-    await API.put(`/posts/like/${post._id}`);
-    onLike();
-  };
-
   return (
-    <Card>
-      {post.imageUrl && (
-        <CardMedia component="img" height="300" image={post.imageUrl} alt="Post image" />
-      )}
+    <Card sx={{ mb: 2, borderRadius: 3 }}>
+      <CardHeader
+        avatar={<Avatar src={post.userId?.avatar} />}
+        title={<Typography fontWeight="bold">{post.userId?.username}</Typography>}
+        subheader={new Date(post.createdAt).toLocaleString()}
+      />
       <CardContent>
-        <Typography variant="subtitle1" fontWeight="bold">
-          {post.userId?.username || "Anonymous"}
-        </Typography>
-        <Typography variant="body1" sx={{ mb: 1 }}>{post.text}</Typography>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <IconButton onClick={toggleLike}>
-            <FavoriteIcon color="error" />
-          </IconButton>
-          <Typography>{post.likesCount}</Typography>
-          <IconButton onClick={() => navigate(`/post/${post._id}`)}>
-            <ChatBubbleOutlineIcon />
-          </IconButton>
-          <Typography>{post.comments?.length || 0}</Typography>
-        </Box>
+        <Typography>{post.text}</Typography>
+        {post.imageUrl && <img src={post.imageUrl} alt="" style={{ width: "100%", borderRadius: 10, marginTop: 8 }} />}
       </CardContent>
+      <CardActions disableSpacing>
+        <IconButton><FavoriteBorderIcon /></IconButton>
+        <Typography>{post.likesCount}</Typography>
+        <IconButton onClick={() => navigate(`/post/${post._id}`)}>
+          <ChatBubbleOutlineIcon />
+        </IconButton>
+        <Typography>{post.comments?.length || 0}</Typography>
+        <IconButton><ShareIcon /></IconButton>
+      </CardActions>
     </Card>
   );
 }

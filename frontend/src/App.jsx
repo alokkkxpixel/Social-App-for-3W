@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Feed from "./pages/Feed";
-import PostDetail from "./pages/PostDetail";
-import "./styles.css";
+import PostDetail from "./pages/PostDetails";
+import "./style.css";
 
 function App() {
   return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, TextField, Button, Typography, Box } from "@mui/material";
 import API from "../api/axiosConfig";
-import CommentCard from "../components/CommentCard";
+import CommentCard from "../Components/commentCard";
 
 export default function PostDetail() {
   const { id } = useParams();
@@ -15,7 +15,7 @@ export default function PostDetail() {
   };
 
   const addComment = async () => {
-    await API.post(`/posts/comments/${id}`, { text: comment });
+    await API.post(`/posts/comment/${id}`, { text: comment });
     setComment("");
     getPost();
   };
@@ -29,7 +29,7 @@ export default function PostDetail() {
   return (
     <Container sx={{ mt: 5 }}>
       <Typography variant="h6" gutterBottom>{post.text}</Typography>
-      {post.comments.map((c, i) => (
+      {post.comments?.map((c, i) => (
         <CommentCard key={i} comment={c} />
       ))}
       <Box sx={{ mt: 3, display: "flex", gap: 1 }}>

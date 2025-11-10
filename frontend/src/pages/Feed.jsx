@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import API from "../api/axiosConfig";
-import PostCard from "../components/PostCard";
+import PostCard from "../Components/PostCard";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
-    const res = await API.get("/posts");
+    const res = await API.get("/posts/all");
+    console.log(res.data)
     setPosts(res.data);
   };
 
