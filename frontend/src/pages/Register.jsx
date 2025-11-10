@@ -2,18 +2,21 @@ import { useState } from "react";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import API from "../api/axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../context/userContext";
 
 export default function Register() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const navigate = useNavigate();
+  const {user , setUser} = useUser()
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.post("/auth/register", form);
-      navigate("/login");
+     const res =  await API.post("/auth/register", form);
+     setUser(res.data.user)
+      navigate("/feed");
     } catch {
       alert("Error registering user");
     }

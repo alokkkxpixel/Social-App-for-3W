@@ -11,30 +11,30 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   
-    async function fetchDATA() {
+    // async function fetchDATA() {
 
-      const token = localStorage.getItem("token")
+    //   const token = localStorage.getItem("token")
 
-      if(!token){
-        return <Navigate to="/login" />
-      }
+    //   if(!token){
+    //     return <Navigate to="/login" />
+    //   }
     
-    try {
-       const res = await API.get("/auth/me")
-        console.log(res.data);
-    } catch (err) {
-    console.log(err)     
-    }
+    // try {
+    //    const res = await API.get("/auth/me")
+    //     console.log(res.data);
+    // } catch (err) {
+    // console.log(err)     
+    // }
      
       
-    }
+    // }
 
 
-    useEffect(() => {
-      fetchDATA()
+    // useEffect(() => {
+    //   fetchDATA()
     
     
-    }, [])
+    // }, [])
     
   return (
 
