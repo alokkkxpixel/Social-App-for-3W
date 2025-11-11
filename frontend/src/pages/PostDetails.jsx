@@ -22,7 +22,7 @@ export default function PostDetail() {
   const handleComment = async () => {
     if (!comment.trim()) return;
     try {
-      await API.post(`/posts/${id}/comments`, { text: comment });
+      await API.post(`/posts/comment/${id}`, { text: comment });
       setComment("");
       fetchPost();
     } catch (err) {

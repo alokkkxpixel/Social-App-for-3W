@@ -14,7 +14,7 @@ export default function Feed() {
   };
 
   const handlePost = async () => {
-    await API.post("/posts", { text });
+    await API.post("/posts/create", { text });
     setText("");
     fetchPosts();
   };
