@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const API = axios.create({
   baseURL: `${import.meta.env.VITE_BASE_URL}/api`,
   withCredentials: true
-});
+})
 
 
 // add token automatic

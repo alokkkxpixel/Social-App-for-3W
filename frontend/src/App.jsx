@@ -11,30 +11,20 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   
-    // async function fetchDATA() {
 
-    //   const token = localStorage.getItem("token")
-
-    //   if(!token){
-    //     return <Navigate to="/login" />
-    //   }
-    
-    // try {
-    //    const res = await API.get("/auth/me")
-    //     console.log(res.data);
-    // } catch (err) {
-    // console.log(err)     
-    // }
-     
-      
-    // }
-
-
-    // useEffect(() => {
-    //   fetchDATA()
-    
-    
-    // }, [])
+  useEffect(() => {
+    const checkBackend = async () => {
+      try {
+        const res = await API.get("/test");
+        console.log("Backend response:", res.data);
+        alert(res.data.message); // shows popup if connected
+      } catch (err) {
+        console.error("Backend not reachable:", err.message);
+        alert("❌ Backend not reachable");
+      }
+    };
+    checkBackend();
+  }, []);
     
   return (
 
